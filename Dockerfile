@@ -7,6 +7,7 @@ EXPOSE 8080
 
 ENV NODE_ENV=production
 COPY package.json package-lock.json ./
+COPY ./env/campusIDs.json /appenv/campusIDs.json
 RUN npm ci --omit=dev
 COPY . .
 RUN npm run build
