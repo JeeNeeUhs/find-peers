@@ -36,7 +36,8 @@ This value should not be higher than 2 * the pull timeout (currently 24 hours)
 | `./env/projectIDs.json`                      | List of all the projects and their corresponding ID to be displayed on the front page | no                |
 | `./env/allProjectIDs.json`                   | List of all projects in the 42 network (as of march 2022)                             | no                |
 | `./env/.env-example`                         | Example file for api tokens, rename to `.env` to activate                             | no                |
-| `./env/campusIDs.json`                       | List of all campuses and their corresponding ID that are fetched from the 42 API      | no                |
+| `./env/campusIDs.json`                       | List of running campuses and their corresponding ID that are fetched from the 42 API  | no                |
+| `./env/allCampusIDs.json`                    | List of all campuses and their corresponding ID that are fetched from the 42 API      | no                |
 | `./database/`                                | All database files, mount this when running in a docker container                     | yes               |
 | `./database/sessions/`                       | All session files currently active                                                    | yes               |
 | `./database/users.json`                      | Userdata associated with session                                                      | yes               |
@@ -46,20 +47,41 @@ This value should not be higher than 2 * the pull timeout (currently 24 hours)
 ## Running
 The 'database' of this project is a folder called 'database' at the root of the project.
 
-### Docker and Docker-compose
-This is in production
+# Docker and Docker-compose
+This is in production use th's commands
 ```shell
-git clone https://github.com/codam-coding-college/find-peers.git
+git clone https://github.com/jeeneeuhs/find-peers.git
 cd find-peers
 docker compose up -d
 
 # To get logs
 docker logs --tail 10000 -f find-peers
 ```
+if you want to change the used campuses you will need to rebuild
+```shell
+git clone https://github.com/jeeneeuhs/find-peers.git
+cd find-peers
+```
+change docker-compose image
+```yaml
+version: "3.7"
 
-### Locally
-- Install Nodejs >= 18.x
-- Install dependencies\
-`npm install`
-- Start development server\
-`npm run dev`
+services:
+  find-peers:
+    container_name: find-peers
+    restart: unless-stopped
+    image: mfindpeersbuild  # change here like this
+    volumes:
+      - $HOME/find-peers/database:/app/database
+    env_file: ./env/.env
+    environment:
+      - PORT=8080
+    ports:
+      - 80:8080
+
+```
+build and run docker
+```shell
+docker build -t mfindpeersbuild .
+docker compose up -d
+```
