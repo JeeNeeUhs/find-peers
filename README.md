@@ -63,6 +63,19 @@ if you want to change the used campuses you will need to rebuild
 git clone https://github.com/jeeneeuhs/find-peers.git
 cd find-peers
 ```
+add or remove any campus ids you want 
+```shell
+#all campus ids
+cat env/allCampusIDs.json
+
+#add or delete the campuses you will use
+nano env/campusIDs.json
+```
+build your own docker
+```shell
+docker build -t myfindpeersbuild .
+```
+
 change docker-compose image
 ```yaml
 version: "3.7"
@@ -81,8 +94,7 @@ services:
       - 80:8080
 
 ```
-build and run docker
+run docker
 ```shell
-docker build -t myfindpeersbuild .
 docker compose up -d
 ```
