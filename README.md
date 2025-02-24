@@ -48,7 +48,7 @@ This value should not be higher than 2 * the pull timeout (currently 24 hours)
 The 'database' of this project is a folder called 'database' at the root of the project.
 
 # Docker and Docker-compose
-This is in production use th's commands
+This is in production use this commands
 ```shell
 git clone https://github.com/jeeneeuhs/find-peers.git
 cd find-peers
@@ -57,6 +57,7 @@ docker compose up -d
 # To get logs
 docker logs --tail 10000 -f find-peers
 ```
+# Change campuses
 if you want to change the used campuses you will need to rebuild
 ```shell
 git clone https://github.com/jeeneeuhs/find-peers.git
