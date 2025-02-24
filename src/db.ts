@@ -3,7 +3,6 @@ import { API } from '42-connector'
 import { ApiProject, Project, ProjectSubscriber } from './types'
 import { env, Campus, ProjectStatus, CampusName } from './env'
 import { logCampus, log, msToHuman, nowISO } from './logger'
-import * as StatsD from './statsd'
 
 const Api: API = new API(env.tokens.sync.UID, env.tokens.sync.secret, {
 	maxRequestPerSecond: env.tokens.sync.maxRequestPerSecond,
@@ -104,7 +103,7 @@ function toProjectSubscriber(x: Readonly<ApiProject>, projectName: string): Proj
 
 export async function getProjectSubscribers(campus: Campus, projectID: number, projectName: string): Promise<ProjectSubscriber[]> {
 	const url = `/v2/projects/${projectID}/projects_users?filter[campus]=${campus.id}&page[size]=100`
-	const onPage = () => StatsD.increment('dbfetch', StatsD.strToTag('campus', campus.name))
+	const onPage = () => console.log(`DB fetch for campus: ${campus.name}`)
 
 	const { ok, json: users }: { ok: boolean; json?: ApiProject[] } = await Api.getPaged(url, onPage)
 	if (!ok || !users) {

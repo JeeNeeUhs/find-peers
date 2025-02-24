@@ -2,7 +2,6 @@ import fs from 'fs'
 import { env } from './env'
 import crypto from 'crypto'
 import { UserProfile } from './types'
-import * as StatsD from './statsd'
 import { findLast, unique } from './util'
 
 interface Visitor {
@@ -48,7 +47,7 @@ export class MetricsStorage {
 		}
 
 		this.visitors.push({ id, campus: user.campusName, date: new Date() })
-		StatsD.increment('visits', StatsD.strToTag('origin', user.campusName))
+		// console.log(`Visit logged for campus: ${user.campusName}`)
 		await fs.promises.writeFile(this.dbPath, JSON.stringify(this.visitors))
 	}
 
