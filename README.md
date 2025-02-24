@@ -1,4 +1,4 @@
-# Find peers --> [find-peers.codam.nl](https://find-peers.codam.nl)
+# Find peers --> [find-peers.jeeneeuhs.dev](https://find-peers.jeeneeuhs.dev)
 
 This website is meant to help students to find peers that are working on the same project
 
