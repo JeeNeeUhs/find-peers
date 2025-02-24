@@ -71,7 +71,7 @@ services:
   find-peers:
     container_name: find-peers
     restart: unless-stopped
-    image: mfindpeersbuild  # change here like this
+    image: myfindpeersbuild  # change here like this
     volumes:
       - $HOME/find-peers/database:/app/database
     env_file: ./env/.env
@@ -83,6 +83,6 @@ services:
 ```
 build and run docker
 ```shell
-docker build -t mfindpeersbuild .
+docker build -t myfindpeersbuild .
 docker compose up -d
 ```
