@@ -61,7 +61,7 @@ export type ProjectStatus = (typeof projectStatuses)[number]
 
 export const env: Readonly<Env> = {
 	logLevel: process.env['NODE_ENV'] === 'production' ? 3 : 1, // 0 being no logging
-	pullTimeout: 24 * 60 * 60 * 1000, // how often to pull the project users statuses form the intra api (in Ms)
+	pullTimeout: 6 * 60 * 60 * 1000, // how often to pull the project users statuses form the intra api (in Ms)
 	projectIDs,
 	campusIDs,
 	databaseRoot,
